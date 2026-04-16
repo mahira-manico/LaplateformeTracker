@@ -77,6 +77,11 @@
                                           <Font name="Orbitron Regular" size="12.0" />
                                        </font>
                                     </Button>
+                                    <Button mnemonicParsing="false" onAction="#onReset" text="Reset">
+                                       <font>
+                                          <Font name="Orbitron Regular" size="12.0" />
+                                       </font>
+                                    </Button>
                                     <Button fx:id="addBtn" mnemonicParsing="false" onAction="#onAdd" text="Add Students">
                                        <font>
                                           <Font name="Orbitron Regular" size="12.0" />
