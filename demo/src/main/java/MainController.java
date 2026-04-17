@@ -1,5 +1,6 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import database.StudentDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,8 +28,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-
-
+import model.Student;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -110,7 +110,7 @@ public class MainController implements Initializable{
 
             if(alert.showAndWait().get()==ButtonType.OK){ //Check if user choose ok
                 try {
-                    StudentDao.deleteStudent(selectedStudent.getStudentById()); //Use the DAO model to delete a student
+                    StudentDao.deleteStudent(selectedStudent.getId()); //Use the DAO model to delete a student
                     studentTable.getItems().remove(selectedStudent); //remove from the table
                     updatePieChart();
                     updateBarChart();
@@ -161,7 +161,7 @@ public class MainController implements Initializable{
             writer.println("<html><body><table border='1'>");
             writer.println("<tr><th>ID</th><th>Nom</th><th>Prénom</th><th>Note</th></tr>");
 
-            for (Student s : StudentTable.getItems()) {
+            for (Student s : studentTable.getItems()) {
                 writer.println("<tr>");
                 writer.println("<td>" + s.getId() + "</td>");
                 writer.println("<td>" + s.getLastName() + "</td>");
@@ -239,7 +239,7 @@ public class MainController implements Initializable{
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(";");
                 Student s = new Student(data[1], data[2], Integer.parseInt(data[3]), Double.parseDouble(data[4]));
-                StudentTable.getItems().add(s);
+                studentTable.getItems().add(s);
             }
         } catch (Exception e) { e.printStackTrace(); }
     }
@@ -254,7 +254,7 @@ public class MainController implements Initializable{
             Type listType = new TypeToken<ArrayList<Student>>(){}.getType();
             List<Student> students = gson.fromJson(reader, listType);
 
-            StudentTable.getItems().addAll(students);
+            studentTable.getItems().addAll(students);
         } catch (Exception e) { e.printStackTrace(); }
     }
 
@@ -268,7 +268,7 @@ public class MainController implements Initializable{
             Unmarshaller unmarshaller = context.createUnmarshaller();
             StudentListWrapper wrapper = (StudentListWrapper) unmarshaller.unmarshal(file);
 
-            StudentTable.getItems().addAll(wrapper.getStudents());
+            studentTable.getItems().addAll(wrapper.getStudents());
         } catch (Exception e) { e.printStackTrace(); }
 
     }
@@ -304,7 +304,6 @@ public class MainController implements Initializable{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StudentFormView.fxml"));
                 Parent root = loader.load();
                 StudentFormController controller = loader.getController();
-                controller.prepareFields(selected);
 
                 Stage stage = new Stage();
                 stage.setTitle("Modify a student");
