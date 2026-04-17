@@ -1,6 +1,6 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import database.StudentDao;
+//import database.StudentDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -110,7 +110,7 @@ public class MainController implements Initializable{
 
             if(alert.showAndWait().get()==ButtonType.OK){ //Check if user choose ok
                 try {
-                    StudentDao.deleteStudent(selectedStudent.getId()); //Use the DAO model to delete a student
+                    //StudentDao.deleteStudent(selectedStudent.getId()); //Use the DAO model to delete a student
                     studentTable.getItems().remove(selectedStudent); //remove from the table
                     updatePieChart();
                     updateBarChart();
@@ -345,6 +345,11 @@ public class MainController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        masterData.add(new Student(1, "Marie", "Curie", 20, 18.5));
+        masterData.add(new Student(2, "Albert", "Einstein", 22, 19.0));
+        masterData.add(new Student(3, "Jean", "Dupont", 19, 11.5));
+
         filteredData = new FilteredList<>(masterData, p -> true);
 
 
