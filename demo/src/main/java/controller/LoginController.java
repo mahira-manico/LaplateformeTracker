@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class LoginController {
 
-    // FXML fields (match with your FXML)
+    // FXML fields
     @FXML private TextField userInput;
     @FXML private PasswordField passwordInput;
     @FXML private Button validateButton;
