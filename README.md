@@ -6,9 +6,9 @@
 
 ## 📸 Preview
 
-| Login                                                  | Dashboard                                          |
-|--------------------------------------------------------|----------------------------------------------------|
-| ![Login screen](./src/main/resources/images/login.png) | ![Main view](./src/main/resources/images/main.png) |
+| Login                               | Dashboard                       |
+|-------------------------------------|---------------------------------|
+| ![Login screen](./images/login.png) | ![Main view](./images/main.png) |
 
 ---
 
