@@ -1,101 +1,84 @@
 # 🎓 La Plateforme_ Tracker
 
-> Prenez le contrôle du parcours éducatif avec **La Plateforme_ Tracker**
-
-Application Java de gestion des étudiants connectée à une base de données PostgreSQL.
+> A Java student management application built as a team project, featuring a JavaFX interface connected to a PostgreSQL database.
 
 ---
 
-## 📋 Table des matières
+## 📸 Preview
 
-- [Description](#description)
-- [Fonctionnalités](#fonctionnalités)
-- [Technologies utilisées](#technologies-utilisées)
-- [Prérequis](#prérequis)
-- [Installation](#installation)
-- [Configuration de la base de données](#configuration-de-la-base-de-données)
+| Login                                                  | Dashboard                                          |
+|--------------------------------------------------------|----------------------------------------------------|
+| ![Login screen](./src/main/resources/images/login.png) | ![Main view](./src/main/resources/images/main.png) |
 
 ---
 
-## 📖 Description
+## 🛠️ Tech Stack
 
-La Plateforme_ Tracker est une application Java qui permet de gérer les informations des étudiants : nom, prénom, âge et notes. Elle utilise **PostgreSQL** comme base de données et **JDBC** pour la connexion, avec une interface graphique développée en **JavaFX**.
-
----
-
-## ✅ Fonctionnalités
-
-### Fonctionnalités de base
-- ➕ **Ajouter** un étudiant (nom, prénom, âge, notes)
-- ✏️ **Modifier** les informations d'un étudiant par son ID
-- 🗑️ **Supprimer** un étudiant par son ID
-- 📋 **Afficher** tous les étudiants
-- 🔍 **Rechercher** un étudiant par son ID
-
-### Fonctionnalités avancées
-- 🔃 **Tri** des étudiants par nom, prénom, âge ou moyenne des notes
-- 🔎 **Recherche avancée** par critères (âge, moyenne des notes, etc.)
-- 📊 **Statistiques** : moyenne de classe, nombre d'étudiants par tranche d'âge
-- 📁 **Import/Export** de données en CSV, XML ou JSON
-- 📄 **Pagination** pour l'affichage par lots
-- ⚠️ **Gestion des erreurs** améliorée avec messages clairs
-- 🔐 **Système d'authentification** (nom d'utilisateur + mot de passe)
-- 📤 **Export des résultats** en CSV, PDF ou HTML
-- 💾 **Sauvegarde automatique** à intervalles réguliers
+| Layer | Technology |
+|-------|------------|
+| Language | Java 21 |
+| UI Framework | JavaFX + FXML |
+| Database | PostgreSQL |
+| DB Connector | JDBC |
+| Version Control | Git / GitHub |
 
 ---
 
-## 🛠️ Technologies utilisées
+## ✅ Features
 
-| Technologie | Usage |
-|---|---|
-| Java | Langage principal |
-| JavaFX | Interface graphique |
-| PostgreSQL | Base de données |
-| JDBC | Connexion Java ↔ PostgreSQL |
-| Git | Gestion de version |
-
----
-
-## ⚙️ Prérequis
-
-Avant de commencer, assure-toi d'avoir installé :
-
-- [Java JDK 17+](https://www.oracle.com/java/technologies/downloads/)
-- [PostgreSQL](https://www.postgresql.org/download/)
-- [Git](https://git-scm.com/)
-- Un IDE : [IntelliJ IDEA](https://www.jetbrains.com/idea/) ou [VS Code](https://code.visualstudio.com/)
+- ➕ Add, ✏️ edit, 🗑️ delete a student
+- 🔍 Search by ID and advanced search (age, grade average...)
+- 🔃 Dynamic sorting (name, surname, age, grade)
+- 📄 Paginated display
+- 📊 Statistics: class average, age distribution
+- 📁 Import / Export in CSV, XML, JSON
+- 📤 Export results to CSV, PDF or HTML
+- 🔐 Authentication (username + password)
+- 💾 Auto-save at regular intervals
 
 ---
 
-## 🚀 Installation
+## 👥 Team & Responsibilities
 
-### 1. Cloner le dépôt
+| Member | Role |
+|--------|------|
+| [@mahira-manico](https://github.com/mahira-manico) | All FXML files · Main Controller |
+| [@moinahalima-abdou](https://github.com/moinahalima-abdou) | Login Controller · Student Controller |
+| [@samba-gomis](https://github.com/samba-gomis) | PostgreSQL database · DAO layer · Models |
 
-``bash
-git clone https://github.com/prenom-nom/LaplateformeTracker.git
+---
+
+## ⚙️ Prerequisites
+
+- Java JDK 21+
+- PostgreSQL
+- Git
+- IntelliJ IDEA or VS Code
+
+---
+
+## 🚀 Getting Started
+
+```bash
+# Clone the repository
+git clone https://github.com/mahira-manico/LaplateformeTracker.git
 cd LaplateformeTracker
+
+# Add the PostgreSQL JDBC driver to your classpath
+# Download the .jar at https://jdbc.postgresql.org/
 ```
-
-### 2. Ajouter le driver JDBC PostgreSQL
-
-Télécharge le fichier `.jar` depuis [jdbc.postgresql.org](https://jdbc.postgresql.org/) et ajoute-le au classpath de ton projet.
 
 ---
 
-## 🗄️ Configuration de la base de données
-
-### 1. Créer la base de données
+## 🗄️ Database Setup
 
 ```sql
+-- Create the database
 CREATE DATABASE laplateforme_tracker;
-```
 
-### 2. Créer la table `student`
-
-```sql
+-- Create the student table
 CREATE TABLE student (
-    id        SERIAL PRIMARY KEY,
+    id         SERIAL PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name  VARCHAR(100) NOT NULL,
     age        INTEGER NOT NULL,
@@ -103,42 +86,29 @@ CREATE TABLE student (
 );
 ```
 
-### 3. Configurer la connexion
-
-Dans le fichier `DatabaseConnection.java` (ou `config.properties`), modifie les paramètres :
+In `DatabaseConnection.java`, update the connection settings:
 
 ```java
 private static final String URL      = "jdbc:postgresql://localhost:5432/laplateforme_tracker";
-private static final String USER     = "ton_utilisateur";
-private static final String PASSWORD = "ton_mot_de_passe";
+private static final String USER     = "your_username";
+private static final String PASSWORD = "your_password";
 ```
 
 ---
 
-## ▶️ Lancement du projet
+## ▶️ Run the App
 
 ```bash
-# Compiler le projet
 javac -cp .:postgresql-driver.jar src/**/*.java
-
-# Lancer l'application
-java -cp .:postgresql-driver.jar Main
+java  -cp .:postgresql-driver.jar Main
 ```
 
-Ou lance directement depuis ton IDE en exécutant la classe `Main.java`.
+Or run `Main.java` directly from your IDE.
 
 ---
 
+## 🔒 Security
 
-
-## 🔒 Sécurité
-
-- Utilisation de **PreparedStatement** pour éviter les injections SQL
-- Système d'authentification pour sécuriser l'accès
-- Gestion des exceptions sur toutes les opérations BDD
-
----
-
-
-
-
+- `PreparedStatement` on all queries to prevent SQL injection
+- Mandatory authentication on startup
+- Exception handling on all database operations
